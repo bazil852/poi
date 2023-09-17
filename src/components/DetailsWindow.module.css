@@ -1,0 +1,109 @@
+.detailsWindow {
+  
+  padding: 20px;
+  margin-top: -35px;
+  padding-left: 50px;
+  padding-right: 50px;
+  word-wrap: break-word;
+  text-align: center;
+  overflow:none;
+  color: black;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow: auto;
+}
+.detailsWindow::-webkit-scrollbar {
+  display: none;
+}
+.maindiv{
+ /* hide scrollbar for IE, Edge and Firefox */
+ -ms-overflow-style: none;
+ scrollbar-width: none;
+ overflow: hidden;
+}
+.maindiv::-webkit-scrollbar {
+  display: none;
+}
+
+.maindiv::-webkit-scrollbar { /* WebKit */
+    width: 0;
+    height: 0;
+}
+
+.detailsWindow::-webkit-scrollbar { /* WebKit */
+  width: 0;
+  height: 0;
+}
+.address{
+  color: grey;
+  font-weight: bold;
+  font-size: 0.8rem;
+  margin-top: 0px;
+}
+.titdiv{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+}
+.title {
+  margin-bottom: 0px;
+  font-size: 1.7rem;
+  text-align: center;
+  width: 30%;
+  font-weight: 600;
+}
+.map-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.inner-map-wrapper {
+  position: relative;
+}
+.mapFadeOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 200px;
+  background: radial-gradient(circle at center 80%, transparent, white 99%);
+  pointer-events: none; /* This line is important as it allows user interactions with the map */
+  z-index: 10000;
+}
+
+
+
+
+.title h2 {
+  font-size: 30px;
+  align-items: center;
+}
+
+.information {
+  font-size: 25px;
+
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+td {
+  word-wrap: break-word;
+  word-wrap: break-word; /* Fallback for old versions of browsers */
+  word-break: break-all; /* Recommended for long unbroken strings */
+}
+
+
+
+a {
+  color: black;
+  /* font-weight: bold; */
+}
+
+

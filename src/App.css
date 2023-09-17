@@ -36,3 +36,213 @@
     transform: rotate(360deg);
   }
 }
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  position: absolute; 
+  height: auto;
+  align-items: center;
+  justify-content: center;  /* Changed from space-around to center */
+  background-color: transparent;
+  padding: 1rem;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+}
+
+
+.navbar input {
+  margin: 0 0.5rem;
+  
+}
+input:focus::placeholder {
+  color: transparent;
+}
+.my-cluster-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #FF3D49;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1em;
+}
+
+.my-cluster-icon::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  background-color: #FF3D49;
+  opacity: 0.4;
+  border-radius: 50%;
+  animation: ripple 1.5s infinite;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+
+.navbar-open {
+  transform: translateX(0);
+}
+
+.navbar-closed {
+  transform: translateX(-30%);
+}
+
+.filters {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  /* justify-content: space-around; */
+  width: 100%;
+  margin-right: 0px;
+  /* border-top: 1px solid black; */
+  border-radius: 16px;
+  font-size: small;
+  /* padding-top: 1rem; */
+}
+.filters label {
+  font-size: 1rem;
+}
+.navbar .filters div {
+  margin-bottom: 10px; /* Adjust as needed */
+  margin-left: 10px;
+  font-size: 1.2em;    /* Adjust as needed */
+  font-weight: 600;
+}
+.navbar .filters div input[type="checkbox"] + label {
+  font-size: 1rem; /* adjust size as needed */
+  margin-bottom: -10px; /* Adjust as needed */
+  margin-left: 0px;
+}
+
+
+.navbar .filters .arrow::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 6px solid black;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  margin-right: 5px;
+}
+
+.navbar .filters .arrow.down::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid black;
+}
+
+
+
+.navbar .search-container {
+  position: relative;
+  display: flex;  /* Change from inline-block to flex */
+  flex-direction: column;
+  align-items: center; /* Add this to vertically center items */
+}
+
+.navbar .search-container button {
+  position: relative;  /* Change from absolute to relative */
+  margin-right: 0.5rem;
+  height: 2rem;  /* Add a fixed height */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.navbar .search-container .butt {
+  position: relative;  /* Change from absolute to relative */
+  margin-left: 0.5rem;
+  height: 2rem;  /* Add a fixed height */
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.navbar .search-container button:focus {
+  outline: none;
+}
+
+
+.navbar .search {
+  width: 100%;
+  /* margin-left: 8%; Removed to center search bar */
+  display: flex;
+  justify-content: center;  /* Changed from flex-start to center */
+  padding-bottom: 1rem;
+}
+.navbar .search input {
+  width: 26rem; /* You can adjust this value to your desired width */
+  height: 2rem;
+  border: 1px white  solid;
+  border-radius: 30px;
+  text-align: center
+}
+
+.navbar .filters select {
+  width: 150px; /* Adjust this value to your desired width */
+  margin: 0 0.5rem;
+}
+
+.navbar .filters option {
+  background-color: violet; /* Set the color for the dropdown options */
+}
+
+
+/* App.css */
+
+.container {
+  position: relative;
+}
+
+.lower-z-index {
+  position: relative;
+  z-index: 0 !important;
+}
+
+.custom-sliding-pane {
+  position: relative;
+  z-index: 9999 !important;
+}
+
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.142); /* Optional: add a translucent white background */
+}
+
+.custom-sliding-pane {
+  background-color: #FBDEBF;
+  color: #1E7C88;
+}
+
+
+
