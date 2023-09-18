@@ -36,7 +36,17 @@ const customStyles = {
     width: 250,
   }),
 };
-
+const MyModal = ({ isOpen, onClose }) => (
+  <div className={`modal ${isOpen ? 'modal-open' : 'modal-closed'}`}>
+    <button onClick={onClose} style={{ position: 'absolute', top: '10px', left: '10px' }}>Close</button>
+    <div className="modal-content">
+      <h2 style={{ color: 'red' }}>Main Title</h2>
+      <hr style={{ borderColor: 'red' }} />
+      <p>Paragraph 1</p>
+      <p>Paragraph 2</p>
+    </div>
+  </div>
+);
 
 const App = () => {
   const [isWindowVisible, setIsWindowVisible] = useState(false);
@@ -48,9 +58,35 @@ const App = () => {
   const [selectedPoiIndex, setSelectedPoiIndex] = useState(null);
   const [showAllFilters, setShowAllFilters] = React.useState(false);
   const [inputValue, setInputValue] = useState('');
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [filterBoxClass, setFilterBoxClass] = useState('');
+  const [modalClass, setModalClass] = useState('');
   
 
+  useEffect(() => {
+    if (showFilterBox) {
+      setFilterBoxClass('fade-in-slide-up-entered');
+    } else {
+      setFilterBoxClass('fade-in-slide-up-exiting');
+      setTimeout(() => {
+        setFilterBoxClass('');
+      }, 300); // Match this with your transition duration
+    }
+  }, [showFilterBox]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      setModalClass('fade-in-slide-up-entering');
+      setTimeout(() => {
+        setModalClass('fade-in-slide-up-entered');
+      }, 0);
+    } else {
+      setModalClass('fade-in-slide-up-exiting');
+      setTimeout(() => {
+        setModalClass('fade-in-slide-up-exited');
+      }, 300);  // Match this with your transition duration
+    }
+  }, [isModalOpen]);
 
 
   const handleMarkerClick = (poi,latLng) => {
@@ -387,6 +423,7 @@ const handleDivClickType = (e) => {
       </div>
       ) : (
           <>
+           
           <nav className={`navbar ${isNavOpen ? 'navbar-open' : 'navbar-closed'}`} style={{ 
             position: 'absolute', 
             zIndex: 1, 
@@ -396,6 +433,7 @@ const handleDivClickType = (e) => {
             justifyContent: 'center', 
             alignItems: 'center',
             }}>
+              
             <div className='search-container' >
               <div className='search'>
                 <button onClick={() => setShowFilterBox(!showFilterBox)}  style={{position:'absolute',marginLeft:'3px',marginTop:'3px',left:0,width:'50px'}}>
@@ -419,7 +457,7 @@ const handleDivClickType = (e) => {
               </div>
               
               {showFilterBox && 
-                <div className='filters' ref={filterBoxRef}>
+                <div className={`filters ${filterBoxClass}`}  ref={filterBoxRef}>
                   <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <h1 style={{fontWeight:'500',fontSize:'1.6rem'}}>Filters </h1>
                     {filterCount >0 && <button style={{color:'red',fontSize:'1rem'}} onClick={clearFilters}>Clear Filters</button>}
@@ -470,16 +508,7 @@ const handleDivClickType = (e) => {
                         </>
                       )}
                     </div>
-              {/* <div onClick={() => setExpandedFilter(expandedFilter === "type" ? "" : "type")}>
-              <span className={expandedFilter === "region" ? "arrow down" : "arrow right"}></span>
-                Type
-                {expandedFilter === "type" && uniqueTypes.map(type => (
-                  <div key={type}>
-                    <input type="checkbox" checked={type === type} onChange={() => setType(type)} />
-                    <label>{type}</label>
-                  </div>
-                ))}
-              </div> */}
+
 
                 <div onClick={handleDivClickMonde}>
                     <span className={expandedFilter === "region" ? "arrow down" : "arrow right"}></span>
@@ -497,18 +526,6 @@ const handleDivClickType = (e) => {
                         </div>
                       ))}
                   </div>
-          
-              {/* <div onClick={() => setExpandedFilter(expandedFilter === "Monderural" ? "" : "Monderural")}>
-              <span className={expandedFilter === "region" ? "arrow down" : "arrow right"}></span>
-                Monde rural
-                {expandedFilter === "Monderural" && uniqueMonderurals.map(monderural => (
-                  <div key={monderural}>
-                    <input type="checkbox" checked={monderural === monderural} onChange={() => setMonderural(monderural)} />
-                    <label>{monderural}</label>
-                  </div>
-                ))}
-              </div> */}
-
 
                 <div onClick={handleDivClickActivit}>
                     <span className={expandedFilter === "region" ? "arrow down" : "arrow right"}></span>
@@ -525,25 +542,39 @@ const handleDivClickType = (e) => {
                         </div>
                       ))}
                   </div>
-          
-              {/* <div onClick={() => setExpandedFilter(expandedFilter === "Activité" ? "" : "Activité")}>
-              <span className={expandedFilter === "region" ? "arrow down" : "arrow right"}></span>
-                Activité
-                {expandedFilter === "Activité" && uniqueActivités.map(activite => (
-                  <div key={activite}>
-                    <input type="checkbox" checked={activite === activite} onChange={() => setActivite(activite)} />
-                    <label>{activite}</label>
-                  </div>
-                ))}
-              </div> */}
-          
-              
+
             </div>
                 </div>
               }
             </div>
           </nav>
-         
+          <button onClick={() => setIsModalOpen(true)} style={{ position: 'absolute', right: '10px', top: '10px', zIndex: '9999',border:'0px',backgroundColor:'transparent' }}>
+      <img src="https://i.postimg.cc/GmvCH7bn/info.png" alt="Open Modal" width={50} />
+    </button>
+
+    {isModalOpen && (
+  <div   onClick={() => setIsModalOpen(false)} style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0, 0, 0, 0.5)', zIndex: '9999' }}>
+    <div className={modalClass} onClick={(e) => e.stopPropagation()} style={{ position: 'relative', margin: '14% auto', width: '20%', backgroundColor: '#fff', padding: '20px', border:'0px',borderRadius:'22px' }}>
+      <button onClick={() => setIsModalOpen(false)} style={{ position: 'absolute', left: '10px', top: '10px',border:'0px',backgroundColor:'transparent' }}>
+        <img src="https://i.postimg.cc/GmvCH7bn/info.png" alt="Close Modal" width={35} />
+      </button>
+      <h1 style={{ textAlign: 'center', color: '#f9647e' }}>Information</h1>
+      
+      <hr style={{ borderColor: '#f9647e',width:'80%' }} />
+      <div style={{paddingLeft:'50px',paddingRight:'50px'}}>
+      <p style={{color:'#8d8d8d'}}>Cette cartographie a été conçue par l’EcclesiaLab, laboratoire de recherche en théologie rattaché à l’UCLouvain (Belgique). Les deux pieds dans le monde universitaire et ecclésial, nous travaillons sur l’innovation dans l’Eglise, en Occident francophone (France, Belgique, Suisse, Luxembourg et Québec). </p>
+      
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <img src='https://i.postimg.cc/kX6VhmvN/magnifying-glass-plus.png' width={20}/> 
+        <a onClick={() => window.open( 'http://www.ecclesialab.org')} style={{color:'#8d8d8d',fontWeight:'bold'}}>En savoir plus</a>
+      </div>
+
+      <p style={{color:'#8d8d8d'}}>Nous avons rassemblé ici des lieux chrétiens innovants, dans le but de vous les faire découvrir, de vous inspirer et de faciliter la rencontre. L’équipe de l’EcclesiaLab a récolté les 200 premiers lieux, à vous de jouer maintenant !</p>
+      </div>
+    </div>
+  </div>
+)}
+
     <div className='container' style={{ position: 'relative', zIndex: 0 }}>
       <MapContainer className="lower-z-index" key={isPaneOpen ? "open-state": "closed-state"} center={[50.4995, 4.4754]} zoom={5} style={{ 
       width: isPaneOpen ? 'calc(100vw - 130vh)' : '100vw', 

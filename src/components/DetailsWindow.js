@@ -71,12 +71,83 @@ const DetailsWindow = ({ poi, coordinates }) => {
       </div>
       
       <p className={styles.address}><img src='https://i.postimg.cc/ryggPfbY/icons8-location-50.png' width={15} /> {Adresse}</p>
+      <div>
+        <p className={styles.nname}>Type</p>
+            <p style={{marginTop:"-1%"}}>{Type?.join(', ')}</p>
+      </div>
+      <div>
+            <p className={styles.nname}>Thématique</p>
+            <p style={{marginTop:"-1%"}}>{kairosPorteEntree?.join(', ')}</p>
+          </div>
+      <p style={{fontSize:'25px',fontWeight:'600',color:'grey'}}>Description</p> 
       <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
 incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices
 gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis</p>
+
+        
       {/* <h3 className={styles.information}>Information</h3> */}
       <table>
         <tbody>
+        <tr>
+            <td><img style={{marginRight:"1%"}} width={25} src='https://i.postimg.cc/cJgRjBJx/article-ny-times-1.png'/><a href={doc1Lien}>{doc1Lien}</a></td>
+          </tr>
+
+          <tr>
+            <td><img style={{marginRight:"1%"}} width={25} src='https://i.postimg.cc/7ZybD1XP/video-1.png'/><a href={doc1Lien}>{doc1Lien}</a></td>
+          </tr>
+          <tr>
+            <td><img style={{marginRight:"1%"}} width={25} src='https://i.postimg.cc/Cx1LsFhD/headphones-1.png'/><a href={doc1Lien}>{doc1Lien}</a></td>
+          </tr>
+          <tr>
+            <td><img style={{marginRight:"1%"}} width={25} src='https://i.postimg.cc/zBNspjCM/link-1.png'/><a href={doc1Lien}>{doc1Lien}</a></td>
+          </tr>
+          <hr style={{color:'grey'}}></hr>
+
+          <tr>
+          {photoDePresentation && (
+            <td>
+           
+              <img
+                src={photoDePresentation[0].thumbnails.large.url}
+                alt={Name}
+                width={photoDePresentation[0].thumbnails.large.width -100}
+                height={photoDePresentation[0].thumbnails.large.height -100}
+                className={styles.image}
+              />
+            
+            </td>)}
+            <td>
+            <td style={{fontSize:'25px',fontWeight:'600',color:'grey'}}>Informations</td> 
+               
+              <tr className={styles.nname}>
+                Réseau
+            
+              </tr>
+              <tr>{Réseau?.join(', ')}</tr>
+
+              <tr className={styles.nname}>
+              Diocèse
+            
+              </tr>
+              <tr>{Diocèse?.join(', ')}</tr>
+              
+            </td>
+            <td>
+            <td style={{fontSize:'25px',fontWeight:'600',color:'grey'}}>Histoire</td> 
+               
+               <tr className={styles.nname}>
+                 Cree le
+             
+               </tr>
+               <tr>{startDate}</tr>
+ 
+               <tr className={styles.nname}>
+               Initiative
+             
+               </tr>
+               <tr>{Initiative?.join(', ')}</tr>
+            </td>
+          </tr>
           <tr>
             {/* <td>Site internet:</td> */}
             {/* <td><a href={siteInternet}>{siteInternet}</a></td> */}
@@ -133,31 +204,19 @@ gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis</p>
             {/* <td>Type:</td> */}
             {/* <td>{Type?.join(', ')}</td> */}
           </tr>
-          <tr>
+          {/* <tr>
           <td style={{fontSize:'25px',fontWeight:'600',color:'grey'}}>Contact:</td> 
-          </tr>
-          <tr>
-            {/* <td>Contact:</td> */}
+          </tr> */}
+          {/* <tr>
             <td>{Contact}</td>
-          </tr>
-          <tr>
-            {/* <td>Kairos / porte d'entrée:</td> */}
-            <td>{kairosPorteEntree?.join(', ')}</td>
-          </tr>
+          </tr> */}
+          
           {/* Add other rows similarly for the rest of the properties */}
         </tbody>
       </table>
       
-      {photoDePresentation && (
-        <img
-          src={photoDePresentation[0].thumbnails.large.url}
-          alt={Name}
-          width={photoDePresentation[0].thumbnails.large.width -100}
-          height={photoDePresentation[0].thumbnails.large.height -100}
-          className={styles.image}
-        />
-      )}
-      <p style={{width:'40%',marginLeft:'50%',fontSize:'0.9rem'}}>{photoref}</p>
+      
+      {/* <p style={{width:'40%',marginLeft:'50%',fontSize:'0.9rem'}}>{photoref}</p> */}
       
     </div>
     </div>
